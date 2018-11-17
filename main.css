@@ -182,11 +182,15 @@ header {
 	font-size: 17px;
 }
 
+
 .main-section input {
 	background-color: transparent;
 	border: 0;
 	border-bottom: 1px solid black;
 }
+
+/* ----------------------------------------------- */ 
+/* ----------------------------------------------- */ 
 
 .set-title {
 	width: 200px;
@@ -198,6 +202,7 @@ header {
 }
 
 .set-title-label {
+	font-size: 12px;
 	width: 100%;
 	display: block;
 }
@@ -206,17 +211,43 @@ header {
 	padding: 0 5px;
 }
 
-.headings, .term-fieldset {
+.headings, .term-field {
 	display: flex;
 	justify-content: space-between;
+	padding: 10px 5px;
 	margin: 5px auto;
 	width: 100%;
 	max-width: 600px;
+	border-radius: 5px;
 }
 
-.term-fieldset input {
-	width: 40%;
+.term-field {
+	background-color: #edf2f4;
+	border: 0;
+	border-bottom: 1px solid #ef233c;
+	margin-bottom: 15px;
 }
+
+.term-field input {
+	height: 30px;
+	padding-left: 5px;
+	margin-top: 5px;
+	width: 40%;
+	background-color: white;
+}
+
+.term-field input[id*="answer"] {
+	text-align: right;
+	padding-right: 5px;
+}
+
+.term-field .delete-icon {
+	font-size: 20px;
+	font-weight: bold;
+	border: 3px solid black;
+	color: #ef233c;
+}
+
 
 
 

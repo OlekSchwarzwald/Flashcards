@@ -27,31 +27,33 @@
 
 	<main>
 		<section class="aside-sets">
-			
+			<!-- narazie puste potym zrobia heh -->
 		</section>
+
 		<section class="main-section start-section">
 			<h1>Ucz się dowolnego materiału przy pomocy zestawów fiszek, które sam stworzysz!</h1>
 		</section>
 		<section class="main-section section-sets" id="section-sets">
 			<h1>Twoje zestawy do nauki</h1>
 		</section>
+
 		<section class="main-section section-new-set" id="section-new-set">
 			<h1>Stwórz nowy zestaw</h1>
 			<div class="set-title">
 				<input type="text" name="set-name" id="set-name">
 				<label for="set-name" class="set-title-label"> Tytuł </label>
 			</div>
-			<p>Ilość pojęć w zestawie: <span class="term-amount"></span></p>
+			<p>Ilość pojęć w zestawie: <span id="term-amount"></span></p>
 			<div class="headings">
 				<h2>Definicja</h2>
 				<h2>Odpowiedź</h2>
 			</div>
-			<fieldset class="term-fieldset">
-				<input type="text" name="input-question1">
-				<span class="counter" id="counter"></span>
-				<input type="text" name="input-answer1">
-			</fieldset>
-			<button type="button">Dodaj nową fiszkę</button>
+			<div class="term-field" id="term-field1">
+				<input type="text" name="input-question1" id="input-question1">
+				<button class="delete-icon" type="button" id="delete-icon1">X</button>
+				<input type="text" name="input-answer1" id="input-answer1">
+			</div>
+			<button type="button" id="new-term-button">Dodaj nową fiszkę</button>
 			<button type="button">Stwórz nowy zestaw</button>
 		</section>
 
@@ -86,7 +88,7 @@
 
 		let tabs =  document.getElementsByClassName("main-section");
 		let setsTab	= document.getElementById("section-sets");
-		let createNewTab = document.getElementById("section-new-set");
+		let EditOrNewSetTab = document.getElementById("section-new-set");
 
 		function hideAllTabs(){
 			for (i = 0; i < tabs.length; i++) {
@@ -99,7 +101,7 @@
 
 		newSetLink.addEventListener("click", function(){
 			hideAllTabs();
-			createNewTab.style.display  = "inherit";
+			EditOrNewSetTab.style.display  = "inherit";
 			if (window.innerWidth < 570) {
 				mainMenu.style.display = "none";
 			}
@@ -113,9 +115,54 @@
 			}
 		});
 
+		// ----------------------------------------------------
+		// Create / delete new term in "New Set" or "Edit Set" sections
+		let termCounter = document.getElementsByClassName("term-field").length;
+		let termAmount = document.getElementById("term-amount");
+		termAmount.innerHTML = termCounter;
+		let newTermButton = document.getElementById("new-term-button");
+		let deleteIconButton = document.getElementById("delete-icon1");
+
+		newTermButton.addEventListener("click", createNewTerm);
+		deleteIconButton.setAttribute("onclick", "deleteTerm(this.id)");
+
+		function createNewTerm(){
+			termCounter++;
+			termAmount.innerHTML = termCounter;
+
+			let newField = document.createElement("div");
+			newField.setAttribute("class", "term-field");
+
+			let newFieldID = "term-field"+termCounter;
+			newField.setAttribute("id", newFieldID);
+
+			let newQuestionInput = document.createElement("input");
+			newField.appendChild(newQuestionInput);
+
+			let newDeleteButton = document.createElement("button");
+			newDeleteButton.innerHTML = 'X';
+			newDeleteButton.setAttribute("class", "delete-icon");
+			newDeleteButton.setAttribute("id", "delete-icon"+termCounter);
+			newDeleteButton.setAttribute("onclick", "deleteTerm(this.id)");
+			newField.appendChild(newDeleteButton);
+
+			let newAnswerInput = document.createElement("input");
+			newField.appendChild(newAnswerInput);
+
+			EditOrNewSetTab.insertBefore(newField, newTermButton);
+		}
+
+		function deleteTerm(id){
+			termCounter--;
+			termAmount.innerHTML = termCounter;
+
+    		fieldID = "term-field"+id.match(/\d/g);
+    		let fieldToDelete = document.getElementById(fieldID);
+    		EditOrNewSetTab.removeChild(fieldToDelete);
+		}
 
 
-
+			
 
 	</script>
 

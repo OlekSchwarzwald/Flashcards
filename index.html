@@ -2,11 +2,122 @@
 <html lang="pl">
 <head>
 	<meta charset="UTF-8">
-	<meta name="author" content="Łukasz Olszewski">
-	<meta name="description" content="Simple page to learn any material using flashcards"
-	<title>Ucz się dowolnego materiału przy pomocy fiszek</title>
+	<meta name="author" content="OlekSchwarzwald">
+	<meta name="description" content="Simple page to learn any material using flashcards">
+	<meta name="viewport" content="width=device-width, initial-scale="1.0">
+	<link href="https://fonts.googleapis.com/css?family=Archivo" rel="stylesheet"> <!-- font-family: 'Archivo', sans-serif; -->
+	<link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<title>Flashcards</title>
 </head>
 <body>
+
+	<header>
+		<h1 class="page-logo">Flashcards</h1>
+		<nav class="main-navigation">
+			<ul id="main-links">
+				<li><a href="#" id="new-set">Nowy Zestaw</a></li>
+				<li><a href="#" id="your-sets">Twoje Zestawy</a></li>
+			</ul>
+			<button class="hamburger-button" type="button" id="hamburger-button">
+				<div class="hamburger-icon"></div>
+			</button>
+		</nav>
+	</header>
+
+	<main>
+		<section class="aside-sets">
+			
+		</section>
+		<section class="main-section start-section">
+			<h1>Ucz się dowolnego materiału przy pomocy zestawów fiszek, które sam stworzysz!</h1>
+		</section>
+		<section class="main-section section-sets" id="section-sets">
+			<h1>Twoje zestawy do nauki</h1>
+		</section>
+		<section class="main-section section-new-set" id="section-new-set">
+			<h1>Stwórz nowy zestaw</h1>
+			<div class="set-title">
+				<input type="text" name="set-name" id="set-name">
+				<label for="set-name" class="set-title-label"> Tytuł </label>
+			</div>
+			<p>Ilość pojęć w zestawie: <span class="term-amount"></span></p>
+			<div class="headings">
+				<h2>Definicja</h2>
+				<h2>Odpowiedź</h2>
+			</div>
+			<fieldset class="term-fieldset">
+				<input type="text" name="input-question1">
+				<span class="counter" id="counter"></span>
+				<input type="text" name="input-answer1">
+			</fieldset>
+			<button type="button">Dodaj nową fiszkę</button>
+			<button type="button">Stwórz nowy zestaw</button>
+		</section>
+
+	</main>
+
+	<script type="text/javascript">
+
+		// ----------------------------------------------------
+		// Responsive Menu with 'hamburger' icon
+
+		let mainMenu = document.getElementById("main-links");
+		document.getElementById("hamburger-button").addEventListener("click", seeMenu);
+
+		function seeMenu(){
+			if (mainMenu.style.display == "flex") {
+				mainMenu.style.display = "none";
+			} else {
+			mainMenu.style.display = "flex";
+			}
+		}
+
+		window.addEventListener('resize', function() {
+			if (window.innerWidth > 570) {
+				mainMenu.style.display = "flex";
+			} else {
+				mainMenu.style.display = "none";
+			}
+		});
+
+		// ----------------------------------------------------
+		// Toggle tabs
+
+		let tabs =  document.getElementsByClassName("main-section");
+		let setsTab	= document.getElementById("section-sets");
+		let createNewTab = document.getElementById("section-new-set");
+
+		function hideAllTabs(){
+			for (i = 0; i < tabs.length; i++) {
+       			tabs[i].style.display = "none";
+			}
+		}
+
+		let newSetLink = document.getElementById("new-set");
+		let yourSetsLink = document.getElementById("your-sets");
+
+		newSetLink.addEventListener("click", function(){
+			hideAllTabs();
+			createNewTab.style.display  = "inherit";
+			if (window.innerWidth < 570) {
+				mainMenu.style.display = "none";
+			}
+		});
+
+		yourSetsLink.addEventListener("click", function(){
+			hideAllTabs();
+			setsTab.style.display  = "inherit";
+			if (window.innerWidth < 570) {
+				mainMenu.style.display = "none";
+			}
+		});
+
+
+
+
+
+	</script>
 
 </body>
 </html>
